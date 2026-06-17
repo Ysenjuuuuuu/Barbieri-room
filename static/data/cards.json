@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "category": "cybersec",
+    "tag": "PURPLE TEAM",
+    "icon": "ti-shield-lock",
+    "title": "Técnicas de Reconhecimento",
+    "description": "OSINT, footprinting passivo e ativo, enumeração de subdomínios.",
+    "content": "Reconhecimento é a fase inicial de qualquer operação ofensiva ou auditoria de segurança. Cobre técnicas passivas (sem contato direto com o alvo) e ativas (interação direta). Ferramentas: theHarvester, Shodan, Maltego, Amass.",
+    "updated": "2025-06",
+    "status": "ativo"
+  },
+  {
+    "id": 2,
+    "category": "cybersec",
+    "tag": "RED TEAM",
+    "icon": "ti-bug",
+    "title": "Exploração e Pós-Exploração",
+    "description": "Payloads, privilege escalation, persistência e lateral movement.",
+    "content": "Após obter acesso inicial, o foco muda para consolidação. Técnicas: escalada de privilégios (SUID, sudo misconfig), persistência (cron, serviços), movimentação lateral (Pass-the-Hash, Kerberoasting). Frameworks: Metasploit, Cobalt Strike.",
+    "updated": "2025-05",
+    "status": "ativo"
+  },
+  {
+    "id": 3,
+    "category": "cybersec",
+    "tag": "BLUE TEAM",
+    "icon": "ti-radar",
+    "title": "Detecção e Resposta",
+    "description": "SIEM, análise de logs, IOCs e playbooks de resposta a incidentes.",
+    "content": "A defesa começa com visibilidade. SIEM (Splunk, Elastic) centraliza logs. IOCs (Indicators of Compromise) são mapeados via frameworks como MITRE ATT&CK. Playbooks definem fluxo de resposta: detecção → contenção → erradicação → recuperação.",
+    "updated": "2025-06",
+    "status": "ativo"
+  },
+  {
+    "id": 4,
+    "category": "concursos",
+    "tag": "CONCURSO",
+    "icon": "ti-file-text",
+    "title": "Direito Administrativo",
+    "description": "Atos administrativos, poderes, princípios e controle da administração.",
+    "content": "Princípios: LIMPE (Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência). Atos administrativos têm 5 elementos: competência, finalidade, forma, motivo e objeto. Poderes: vinculado, discricionário, hierárquico, disciplinar, regulamentar e de polícia.",
+    "updated": "2025-04",
+    "status": "revisão pendente"
+  },
+  {
+    "id": 5,
+    "category": "concursos",
+    "tag": "CONCURSO",
+    "icon": "ti-cpu",
+    "title": "Informática — Redes",
+    "description": "Modelo OSI, TCP/IP, protocolos, firewalls e conceitos de segurança.",
+    "content": "OSI tem 7 camadas. TCP/IP tem 4. Protocolos essenciais: HTTP/S (80/443), SSH (22), DNS (53), SMTP (25/587), FTP (21). Firewalls: stateless vs stateful. VPN: IPSec, SSL/TLS. Conceitos cobrados: NAT, DHCP, sub-redes, CIDR.",
+    "updated": "2025-04",
+    "status": "ativo"
+  },
+  {
+    "id": 6,
+    "category": "projetos",
+    "tag": "PROJETO",
+    "icon": "ti-terminal-2",
+    "title": "Barbieri-Roon Dev Log",
+    "description": "Arquitetura, decisões técnicas e roadmap do próprio sistema.",
+    "content": "Stack: Flask (Python) + HTML/CSS/JS puro + JSON como datastore. Roadmap: v1.0 — biblioteca base com cards; v1.1 — sistema de busca; v1.2 — autenticação; v2.0 — módulo Spotify (OAuth2) integrado ao Cantinho da Mon Cherí Bordin.",
+    "updated": "2026-06",
+    "status": "em construção"
+  },
+  {
+    "id": 7,
+    "category": "especial",
+    "tag": "ESPECIAL",
+    "icon": "ti-heart",
+    "title": "Cantinho da Mon Cherí Bordin",
+    "description": "Um espaço só dela. Em breve com as músicas dela tocando.",
+    "content": "Módulo reservado. Integração Spotify via OAuth2 — as músicas curtidas dela, o clima certo, o lugar certo. Em desenvolvimento para quando o momento chegar.",
+    "updated": "em breve",
+    "status": "locked"
+  }
+]
