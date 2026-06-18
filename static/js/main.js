@@ -1,7 +1,7 @@
 /* ============================================================
-   BARBIERI-ROON — main.js
-   Responsabilidades: buscar cards da API, renderizar, filtrar,
-   buscar por texto e abrir modal de detalhes.
+   BARBIERI-ROON — main.js  v1.1
+   Busca cards da API, renderiza grid, filtros, busca ao vivo.
+   Clique no card → navega para /card/<id> (página dedicada).
    ============================================================ */
 
 const CATEGORY_COLOR = {
@@ -11,105 +11,116 @@ const CATEGORY_COLOR = {
   especial:  "pink",
 };
 
-const STATUS_CLASS = {
-  "ativo":           "ativo",
-  "locked":          "locked",
-  "revisão pendente":"pendente",
-  "em construção":   "construcao",
-};
-
-// ── Estado global ─────────────────────────────────────────
+// ── Estado ────────────────────────────────────────────────
 
 let allCards     = [];
 let activeFilter = "todos";
 let searchQuery  = "";
 
-// ── Elementos do DOM ──────────────────────────────────────
+// ── DOM ───────────────────────────────────────────────────
 
-const grid        = document.getElementById("card-grid");
-const filterBtns  = document.querySelectorAll(".filter-btn");
-const searchInput = document.getElementById("search-input");
-const termCards   = document.getElementById("term-cards");
+const grid       = document.getElementById("card-grid");
+const filterBtns = document.querySelectorAll(".filter-btn");
+const searchInput= document.getElementById("search-input");
+const termCards  = document.getElementById("term-cards");
 
-const modalOverlay = document.getElementById("modal-overlay");
-const modal        = document.getElementById("modal");
-const modalClose   = document.getElementById("modal-close");
-const modalTag     = document.getElementById("modal-tag");
-const modalTitle   = document.getElementById("modal-title");
-const modalContent = document.getElementById("modal-content");
-const modalStatus  = document.getElementById("modal-status");
-const modalDate    = document.getElementById("modal-date");
-
-// ── Fetch cards da API Flask ──────────────────────────────
+// ── Fetch ─────────────────────────────────────────────────
 
 async function fetchCards() {
   try {
     const res = await fetch("/api/cards");
-    if (!res.ok) throw new Error("Falha na API");
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     allCards = await res.json();
+    applyURLFilter();
     renderCards();
     updateTerminal();
   } catch (err) {
     grid.innerHTML = `
-      <p style="color:rgba(244,114,182,0.7);font-family:var(--mono);font-size:12px;padding:1rem 0;grid-column:1/-1;">
-        ► erro ao carregar cards: ${err.message}
+      <p class="grid-error">
+        <i class="ti ti-alert-circle"></i>
+        erro ao carregar cards: ${err.message}
       </p>`;
   }
 }
 
-// ── Renderização ──────────────────────────────────────────
+// Lê ?filter= da URL para ativar categoria direto
+function applyURLFilter() {
+  const params = new URLSearchParams(window.location.search);
+  const f = params.get("filter");
+  if (f) {
+    activeFilter = f;
+    filterBtns.forEach(b => {
+      b.classList.toggle("active", b.dataset.filter === f);
+    });
+  }
+}
+
+// ── Render ────────────────────────────────────────────────
 
 function renderCards() {
-  const filtered = allCards.filter(card => {
-    const matchFilter =
-      activeFilter === "todos" || card.category === activeFilter;
+  const q = searchQuery.toLowerCase().trim();
 
-    const q = searchQuery.toLowerCase();
-    const matchSearch =
-      !q ||
+  const filtered = allCards.filter(card => {
+    const matchFilter = activeFilter === "todos" || card.category === activeFilter;
+    const matchSearch = !q ||
       card.title.toLowerCase().includes(q) ||
       card.description.toLowerCase().includes(q) ||
       card.tag.toLowerCase().includes(q);
-
     return matchFilter && matchSearch;
   });
 
   if (filtered.length === 0) {
     grid.innerHTML = `
-      <p style="color:var(--text-4);font-family:var(--mono);font-size:12px;padding:1rem 0;grid-column:1/-1;">
-        ► nenhum card encontrado.
+      <p class="grid-empty">
+        <i class="ti ti-mood-empty"></i> nenhum card encontrado.
       </p>`;
     return;
   }
 
-  grid.innerHTML = filtered.map(card => buildCard(card)).join("");
+  grid.innerHTML = filtered.map(buildCard).join("");
 
-  // Adiciona listeners de clique nos cards
-  grid.querySelectorAll(".card").forEach(el => {
+  // Clique → navegação (exceto card especial locked que vai p/ /especial)
+  grid.querySelectorAll(".card[data-href]").forEach(el => {
     el.addEventListener("click", () => {
-      const id = parseInt(el.dataset.id, 10);
-      const card = allCards.find(c => c.id === id);
-      if (card && card.status !== "locked") openModal(card);
+      window.location.href = el.dataset.href;
+    });
+    // Acessibilidade: Enter/Space também navega
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        window.location.href = el.dataset.href;
+      }
     });
   });
 }
 
 function buildCard(card) {
-  const color   = CATEGORY_COLOR[card.category] || "blue";
+  const color    = CATEGORY_COLOR[card.category] || "blue";
   const isLocked = card.status === "locked";
+  const href     = isLocked ? "/especial" : `/card/${card.id}`;
+
+  const sectionCount = card.sections ? card.sections.length : 0;
 
   const footer = isLocked
     ? `<div class="card-footer">
          <span class="card-date">${card.updated}</span>
-         <span class="lock-badge"><i class="ti ti-lock"></i> bloqueado</span>
+         <span class="lock-badge"><i class="ti ti-heart"></i> especial</span>
        </div>`
     : `<div class="card-footer">
          <span class="card-date">${card.updated}</span>
+         <span class="card-sections">${sectionCount} seção${sectionCount !== 1 ? "ões" : ""}</span>
          <i class="ti ti-arrow-right card-arrow"></i>
        </div>`;
 
   return `
-    <article class="card ${color}${isLocked ? " locked" : ""}" data-id="${card.id}">
+    <article
+      class="card ${color}${isLocked ? " locked" : ""}"
+      data-id="${card.id}"
+      data-href="${href}"
+      role="link"
+      tabindex="0"
+      aria-label="Abrir: ${card.title}"
+    >
       <i class="ti ${card.icon} card-icon"></i>
       <span class="card-tag">// ${card.tag}</span>
       <h3>${card.title}</h3>
@@ -129,73 +140,31 @@ filterBtns.forEach(btn => {
   });
 });
 
-// ── Busca ─────────────────────────────────────────────────
+// ── Busca ao vivo ─────────────────────────────────────────
 
 searchInput.addEventListener("input", e => {
   searchQuery = e.target.value;
   renderCards();
 });
 
-// ── Modal ─────────────────────────────────────────────────
-
-function openModal(card) {
-  const color = CATEGORY_COLOR[card.category] || "blue";
-
-  modal.className = `modal ${color}`;
-  modalTag.textContent  = `// ${card.tag}`;
-  modalTag.style.color  = getAccentColor(color);
-  modalTitle.textContent   = card.title;
-  modalContent.textContent = card.content;
-
-  const statusKey = card.status;
-  const statusClass = STATUS_CLASS[statusKey] || "ativo";
-  modalStatus.className   = `modal-status ${statusClass}`;
-  modalStatus.textContent = card.status;
-  modalDate.textContent   = `atualizado: ${card.updated}`;
-
-  modalOverlay.classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
-function closeModal() {
-  modalOverlay.classList.remove("open");
-  document.body.style.overflow = "";
-}
-
-modalClose.addEventListener("click", closeModal);
-modalOverlay.addEventListener("click", e => {
-  if (e.target === modalOverlay) closeModal();
-});
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") closeModal();
+// Limpar busca com Escape
+searchInput.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    searchQuery = "";
+    searchInput.value = "";
+    renderCards();
+  }
 });
 
-// ── Terminal status ───────────────────────────────────────
+// ── Terminal ──────────────────────────────────────────────
 
 function updateTerminal() {
-  const total = allCards.filter(c => c.status !== "locked").length;
-  termCards.textContent = `► cards carregados: ${total} / módulo spotify: aguardando`;
+  const visible = allCards.filter(c => c.status !== "locked").length;
+  if (termCards) {
+    termCards.textContent =
+      `► cards carregados: ${visible} / módulo especial: aguardando`;
+  }
 }
-
-// ── Helpers ───────────────────────────────────────────────
-
-function getAccentColor(color) {
-  const map = {
-    blue:   "#38bdf8",
-    purple: "#c084fc",
-    green:  "#22c55e",
-    pink:   "#f472b6",
-  };
-  return map[color] || "#38bdf8";
-}
-
-// Nav anchors → filtros
-document.getElementById("nav-cybersec")?.addEventListener("click", () => {
-  document.querySelector('[data-filter="cybersec"]').click();
-});
-document.getElementById("nav-concursos")?.addEventListener("click", () => {
-  document.querySelector('[data-filter="concursos"]').click();
-});
 
 // ── Init ──────────────────────────────────────────────────
 

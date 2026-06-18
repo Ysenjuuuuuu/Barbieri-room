@@ -6,9 +6,27 @@
     "icon": "ti-shield-lock",
     "title": "Técnicas de Reconhecimento",
     "description": "OSINT, footprinting passivo e ativo, enumeração de subdomínios.",
-    "content": "Reconhecimento é a fase inicial de qualquer operação ofensiva ou auditoria de segurança. Cobre técnicas passivas (sem contato direto com o alvo) e ativas (interação direta). Ferramentas: theHarvester, Shodan, Maltego, Amass.",
     "updated": "2025-06",
-    "status": "ativo"
+    "status": "ativo",
+    "images": [],
+    "sections": [
+      {
+        "heading": "O que é reconhecimento?",
+        "body": "Reconhecimento é a fase inicial de qualquer operação ofensiva ou auditoria de segurança. O objetivo é coletar o máximo de informação possível sobre o alvo antes de qualquer interação direta."
+      },
+      {
+        "heading": "Reconhecimento Passivo",
+        "body": "Não há contato direto com o alvo. Fontes abertas (OSINT): Google Dorks, Shodan, Censys, WHOIS, registros DNS públicos, LinkedIn, GitHub vazado, Wayback Machine."
+      },
+      {
+        "heading": "Reconhecimento Ativo",
+        "body": "Interação direta com a infraestrutura do alvo. Técnicas: ping sweep, port scanning (Nmap), banner grabbing, enumeração de subdomínios (Amass, Subfinder), traceroute."
+      },
+      {
+        "heading": "Ferramentas Essenciais",
+        "body": "theHarvester (emails/domínios), Maltego (mapeamento visual), Shodan (dispositivos expostos), Recon-ng (framework modular), SpiderFoot (automação OSINT)."
+      }
+    ]
   },
   {
     "id": 2,
@@ -17,9 +35,27 @@
     "icon": "ti-bug",
     "title": "Exploração e Pós-Exploração",
     "description": "Payloads, privilege escalation, persistência e lateral movement.",
-    "content": "Após obter acesso inicial, o foco muda para consolidação. Técnicas: escalada de privilégios (SUID, sudo misconfig), persistência (cron, serviços), movimentação lateral (Pass-the-Hash, Kerberoasting). Frameworks: Metasploit, Cobalt Strike.",
     "updated": "2025-05",
-    "status": "ativo"
+    "status": "ativo",
+    "images": [],
+    "sections": [
+      {
+        "heading": "Acesso Inicial",
+        "body": "Vetores comuns: phishing, exploração de serviços expostos, credenciais vazadas, supply chain. O acesso inicial é apenas o começo — o objetivo é consolidar presença."
+      },
+      {
+        "heading": "Escalada de Privilégios",
+        "body": "Linux: SUID mal configurado, sudo -l, cron jobs graváveis, kernel exploits. Windows: token impersonation, SeImpersonatePrivilege, unquoted service paths, DLL hijacking."
+      },
+      {
+        "heading": "Persistência",
+        "body": "Garantir que o acesso sobreviva a reboots. Linux: crontab, .bashrc, serviços systemd. Windows: registro (Run keys), tarefas agendadas, WMI subscriptions, backdoors em serviços."
+      },
+      {
+        "heading": "Lateral Movement",
+        "body": "Técnicas: Pass-the-Hash, Pass-the-Ticket, Kerberoasting, Golden Ticket, PsExec, WMIExec. Frameworks: Metasploit, Cobalt Strike, Sliver (open-source)."
+      }
+    ]
   },
   {
     "id": 3,
@@ -28,9 +64,27 @@
     "icon": "ti-radar",
     "title": "Detecção e Resposta",
     "description": "SIEM, análise de logs, IOCs e playbooks de resposta a incidentes.",
-    "content": "A defesa começa com visibilidade. SIEM (Splunk, Elastic) centraliza logs. IOCs (Indicators of Compromise) são mapeados via frameworks como MITRE ATT&CK. Playbooks definem fluxo de resposta: detecção → contenção → erradicação → recuperação.",
     "updated": "2025-06",
-    "status": "ativo"
+    "status": "ativo",
+    "images": [],
+    "sections": [
+      {
+        "heading": "Visibilidade é tudo",
+        "body": "Sem logs centralizados, você está cego. SIEM (Splunk, Elastic/ELK, Wazuh) agrega e correlaciona eventos de múltiplas fontes: firewalls, endpoints, servidores, cloud."
+      },
+      {
+        "heading": "IOCs e Threat Intelligence",
+        "body": "Indicators of Compromise: IPs maliciosos, hashes de malware, domínios C2, padrões de User-Agent. Feeds: MISP, AlienVault OTX, VirusTotal, Abuse.ch."
+      },
+      {
+        "heading": "MITRE ATT&CK",
+        "body": "Framework que mapeia TTPs (Táticas, Técnicas e Procedimentos) de adversários reais. Essencial para estruturar detecções, cobrir gaps de visibilidade e comunicar risco."
+      },
+      {
+        "heading": "Playbook de Resposta",
+        "body": "Ciclo: Detecção → Triagem → Contenção → Erradicação → Recuperação → Lições aprendidas. Cada fase tem ações definidas para não improvisar durante um incidente real."
+      }
+    ]
   },
   {
     "id": 4,
@@ -39,9 +93,27 @@
     "icon": "ti-file-text",
     "title": "Direito Administrativo",
     "description": "Atos administrativos, poderes, princípios e controle da administração.",
-    "content": "Princípios: LIMPE (Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência). Atos administrativos têm 5 elementos: competência, finalidade, forma, motivo e objeto. Poderes: vinculado, discricionário, hierárquico, disciplinar, regulamentar e de polícia.",
     "updated": "2025-04",
-    "status": "revisão pendente"
+    "status": "revisão pendente",
+    "images": [],
+    "sections": [
+      {
+        "heading": "Princípios — LIMPE",
+        "body": "Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência. Base constitucional (art. 37 CF). Cada princípio tem desdobramentos que caem em prova — especialmente Eficiência e Moralidade."
+      },
+      {
+        "heading": "Atos Administrativos",
+        "body": "5 elementos: competência (quem pratica), finalidade (interesse público), forma (como exterioriza), motivo (fato + fundamento jurídico) e objeto (resultado). Vício em qualquer elemento = nulidade."
+      },
+      {
+        "heading": "Poderes Administrativos",
+        "body": "Vinculado, discricionário, hierárquico, disciplinar, regulamentar e de polícia. Poder de polícia: limita direitos individuais em favor do coletivo — atributos: discricionariedade, autoexecutoriedade, coercibilidade."
+      },
+      {
+        "heading": "Controle da Administração",
+        "body": "Controle interno (própria administração), externo (Legislativo + TCU), judicial (legalidade). Súmulas STJ/STF são recorrentes em questões de controle e responsabilidade civil do Estado."
+      }
+    ]
   },
   {
     "id": 5,
@@ -50,9 +122,27 @@
     "icon": "ti-cpu",
     "title": "Informática — Redes",
     "description": "Modelo OSI, TCP/IP, protocolos, firewalls e conceitos de segurança.",
-    "content": "OSI tem 7 camadas. TCP/IP tem 4. Protocolos essenciais: HTTP/S (80/443), SSH (22), DNS (53), SMTP (25/587), FTP (21). Firewalls: stateless vs stateful. VPN: IPSec, SSL/TLS. Conceitos cobrados: NAT, DHCP, sub-redes, CIDR.",
     "updated": "2025-04",
-    "status": "ativo"
+    "status": "ativo",
+    "images": [],
+    "sections": [
+      {
+        "heading": "Modelos OSI e TCP/IP",
+        "body": "OSI: 7 camadas (Física, Enlace, Rede, Transporte, Sessão, Apresentação, Aplicação). TCP/IP: 4 camadas (Acesso à rede, Internet, Transporte, Aplicação). Questões cobram mapeamento entre os dois modelos."
+      },
+      {
+        "heading": "Protocolos e Portas",
+        "body": "HTTP 80, HTTPS 443, FTP 21, SSH 22, Telnet 23, SMTP 25/587, DNS 53, DHCP 67/68, POP3 110, IMAP 143, RDP 3389. Decorar porta + protocolo + função é obrigatório."
+      },
+      {
+        "heading": "Segurança de Redes",
+        "body": "Firewall stateless vs stateful vs NGFW. IDS (detecta) vs IPS (bloqueia). VPN: IPSec (camada 3), SSL/TLS (camada 4/7). DMZ: zona desmilitarizada para serviços expostos."
+      },
+      {
+        "heading": "Endereçamento IP",
+        "body": "IPv4 classes, sub-redes CIDR, NAT (estático, dinâmico, PAT). IPv6: 128 bits, notação hexadecimal. Endereços privados: 10.x, 172.16-31.x, 192.168.x. Broadcast, unicast, multicast, anycast."
+      }
+    ]
   },
   {
     "id": 6,
@@ -61,9 +151,27 @@
     "icon": "ti-terminal-2",
     "title": "Barbieri-Roon Dev Log",
     "description": "Arquitetura, decisões técnicas e roadmap do próprio sistema.",
-    "content": "Stack: Flask (Python) + HTML/CSS/JS puro + JSON como datastore. Roadmap: v1.0 — biblioteca base com cards; v1.1 — sistema de busca; v1.2 — autenticação; v2.0 — módulo Spotify (OAuth2) integrado ao Cantinho da Mon Cherí Bordin.",
     "updated": "2026-06",
-    "status": "em construção"
+    "status": "em construção",
+    "images": [],
+    "sections": [
+      {
+        "heading": "Stack e decisões técnicas",
+        "body": "Flask como backend — leve, sem overhead, perfeito pra aprender estrutura real. HTML/CSS/JS puro no frontend — sem framework que esconda a mágica. JSON como datastore — editável direto, sem banco de dados ainda."
+      },
+      {
+        "heading": "Arquitetura de rotas",
+        "body": "/ → index com grid de cards. /card/<id> → página de detalhe dinâmica. /especial → Cantinho da Mon Cherí Bordin. /api/cards → endpoint REST que alimenta o frontend."
+      },
+      {
+        "heading": "Roadmap",
+        "body": "v1.0 — biblioteca base com cards e páginas de detalhe. v1.1 — sistema de busca avançada + tags. v1.2 — autenticação básica por senha. v2.0 — módulo Spotify via OAuth2 integrado ao módulo especial."
+      },
+      {
+        "heading": "Próximos passos",
+        "body": "Upload de imagens por card, editor de conteúdo direto na interface, sistema de anotações pessoais por seção e, quando chegar a hora certa, integração completa do Cantinho da Mon Cherí Bordin."
+      }
+    ]
   },
   {
     "id": 7,
@@ -72,8 +180,9 @@
     "icon": "ti-heart",
     "title": "Cantinho da Mon Cherí Bordin",
     "description": "Um espaço só dela. Em breve com as músicas dela tocando.",
-    "content": "Módulo reservado. Integração Spotify via OAuth2 — as músicas curtidas dela, o clima certo, o lugar certo. Em desenvolvimento para quando o momento chegar.",
     "updated": "em breve",
-    "status": "locked"
+    "status": "locked",
+    "images": [],
+    "sections": []
   }
 ]

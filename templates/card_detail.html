@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ card.title }} — BARBIERI-ROON</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/detail.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a class="nav-logo" href="/">BARBIERI<span>ROON</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Biblioteca</a></li>
+      <li><a href="/?filter=cybersec">CyberSec</a></li>
+      <li><a href="/?filter=concursos">Concursos</a></li>
+      <li><a href="/?filter=projetos">Projetos</a></li>
+    </ul>
+    <div class="nav-badge">SISTEMA ATIVO</div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="/"><i class="ti ti-home"></i> Início</a>
+    <span class="bc-sep"><i class="ti ti-chevron-right"></i></span>
+    <span class="bc-tag bc-{{ color }}">{{ card.tag }}</span>
+    <span class="bc-sep"><i class="ti ti-chevron-right"></i></span>
+    <span class="bc-current">{{ card.title }}</span>
+  </div>
+
+  <!-- HERO DO CARD -->
+  <header class="detail-hero detail-{{ color }}">
+    <div class="detail-hero-inner">
+      <p class="detail-label">// {{ card.tag }}</p>
+      <h1>{{ card.title }}</h1>
+      <p class="detail-desc">{{ card.description }}</p>
+      <div class="detail-meta">
+        <span class="detail-status status-{{ card.status | replace(' ', '-') }}">
+          <i class="ti ti-circle-filled" style="font-size:8px;"></i>
+          {{ card.status }}
+        </span>
+        <span class="detail-date">
+          <i class="ti ti-calendar-event"></i> {{ card.updated }}
+        </span>
+        <span class="detail-date">
+          <i class="ti ti-layers"></i> {{ card.sections | length }} seções
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <div class="detail-body">
+
+    {% if card.images %}
+    <section class="detail-gallery">
+      <h2 class="section-title detail-{{ color }}-text">
+        <i class="ti ti-photo"></i> Galeria
+      </h2>
+      <div class="gallery-grid">
+        {% for img in card.images %}
+        <div class="gallery-item">
+          <img src="{{ img.src }}" alt="{{ img.caption }}" loading="lazy" />
+          {% if img.caption %}
+          <p class="gallery-caption">{{ img.caption }}</p>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if card.sections %}
+    <section class="detail-sections">
+      {% for section in card.sections %}
+      <div class="detail-section detail-{{ color }}-border">
+        <h2 class="section-heading detail-{{ color }}-text">
+          {{ section.heading }}
+        </h2>
+        <p class="section-body">{{ section.body }}</p>
+      </div>
+      {% endfor %}
+    </section>
+    {% else %}
+    <div class="detail-empty">
+      <i class="ti ti-file-plus"></i>
+      <p>Nenhum conteúdo adicionado ainda.</p>
+      <span class="detail-hint">
+        Edite <code>static/data/cards.json</code> e adicione seções e imagens a este card.
+      </span>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <!-- NAVEGAÇÃO -->
+  <div class="detail-nav-cards">
+    <a href="/" class="detail-back">
+      <i class="ti ti-arrow-left"></i> Voltar para biblioteca
+    </a>
+    <a href="/?filter={{ card.category }}" class="detail-back">
+      <i class="ti ti-layout-grid"></i> Ver todos de {{ card.tag }}
+    </a>
+  </div>
+
+  <!-- TERMINAL -->
+  <section class="terminal" style="margin-top:1.5rem;">
+    <div class="terminal-inner">
+      <div class="terminal-header">
+        <div class="terminal-dot"></div>
+        <div class="terminal-title">OPERAÇÃO: BARBIERI SECURITY RD</div>
+      </div>
+      <p class="terminal-line">
+        <span class="prompt">$ </span>open <span class="val">/card/{{ card.id }} "{{ card.title }}"</span>
+      </p>
+      <p class="terminal-line">
+        <span class="val">► seções: {{ card.sections | length }} / imagens: {{ card.images | length }} / status: {{ card.status }}</span>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 BARBIERI RD — Todos os direitos reservados</p>
+    <p>Next-Gen Web · CyberSec · Python</p>
+  </footer>
+
+</body>
+</html>

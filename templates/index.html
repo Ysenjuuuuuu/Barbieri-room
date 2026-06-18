@@ -3,101 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BARBIERI-ROON</title>
+  <title>BARBIERI-ROON — Biblioteca Pessoal</title>
+  <meta name="description" content="Repositório pessoal de conhecimento — CyberSec, Concursos e Projetos." />
 
-  <!-- Tabler Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="/static/css/style.css" />
 </head>
-
 <body>
 
-  <!-- ── NAV ────────────────────────────────────────────── -->
+  <!-- NAV -->
   <nav class="nav">
-    <a class="nav-logo" href="#">BARBIERI<span>ROON</span></a>
-
+    <a class="nav-logo" href="/">BARBIERI<span>ROON</span></a>
     <ul class="nav-links">
-      <li><a href="#biblioteca">Biblioteca</a></li>
-      <li><a href="#concursos">Concursos</a></li>
-      <li><a href="#cybersec">CyberSec</a></li>
-      <li><a href="#planos">Planos</a></li>
+      <li><a href="/">Biblioteca</a></li>
+      <li><a href="/?filter=cybersec">CyberSec</a></li>
+      <li><a href="/?filter=concursos">Concursos</a></li>
+      <li><a href="/?filter=projetos">Projetos</a></li>
     </ul>
-
     <div class="nav-badge">SISTEMA ATIVO</div>
   </nav>
 
-  <!-- ── HERO ───────────────────────────────────────────── -->
-  <header class="hero" id="biblioteca">
-    <p class="hero-label">// BARBIERI PERSONAL KNOWLEDGE BASE v1.0</p>
+  <!-- HERO -->
+  <header class="hero">
+    <p class="hero-label">// BARBIERI PERSONAL KNOWLEDGE BASE v1.1</p>
     <h1>Seu repositório.<br><em>Sua inteligência.</em></h1>
-    <p>Cards interativos, planos de estudo e informações organizadas — tudo num só sistema.</p>
+    <p>Cards interativos, planos de estudo e informações organizadas — tudo num só sistema exatamente o pai ta sabendo.</p>
   </header>
 
-  <!-- ── SEARCH ─────────────────────────────────────────── -->
+  <!-- SEARCH -->
   <div class="search-wrap">
     <div class="search-box">
       <i class="ti ti-search"></i>
-      <input type="text" id="search-input" placeholder="buscar nos cards..." autocomplete="off" />
+      <input type="text" id="search-input" placeholder="buscar nos cards..." autocomplete="off" spellcheck="false" />
     </div>
   </div>
 
-  <!-- ── FILTERS ────────────────────────────────────────── -->
-  <div class="filters" id="filters">
+  <!-- FILTERS -->
+  <div class="filters">
     <button class="filter-btn active" data-filter="todos">TODOS</button>
-    <button class="filter-btn" data-filter="cybersec" id="nav-cybersec">CYBERSEC</button>
-    <button class="filter-btn purple" data-filter="concursos" id="nav-concursos">CONCURSOS</button>
-    <button class="filter-btn green" data-filter="projetos">PROJETOS</button>
-    <button class="filter-btn pink" data-filter="especial">
-      ❤ CANTINHO DA MON CHERÍ BORDIN
-    </button>
+    <button class="filter-btn"        data-filter="cybersec">CYBERSEC</button>
+    <button class="filter-btn purple" data-filter="concursos">CONCURSOS</button>
+    <button class="filter-btn green"  data-filter="projetos">PROJETOS</button>
+    <button class="filter-btn pink"   data-filter="especial">❤ MON CHERÍ</button>
   </div>
 
-  <!-- ── GRID ───────────────────────────────────────────── -->
-  <main class="grid" id="card-grid">
-    <!-- cards injetados pelo main.js -->
+  <!-- GRID -->
+  <main class="grid" id="card-grid" aria-label="Biblioteca de cards">
+    <!-- injetado pelo main.js -->
   </main>
 
-  <!-- ── TERMINAL ───────────────────────────────────────── -->
-  <section class="terminal" id="planos">
+  <!-- TERMINAL -->
+  <section class="terminal" aria-label="Status do sistema">
     <div class="terminal-inner">
       <div class="terminal-header">
         <div class="terminal-dot"></div>
         <div class="terminal-title">OPERAÇÃO: BARBIERI SECURITY RD</div>
       </div>
-      <p class="terminal-line"><span class="prompt">$ </span>status <span class="val">--sistema barbieri-roon</span></p>
-      <p class="terminal-line"><span class="val" id="term-cards">► cards carregados: —</span></p>
-      <p class="terminal-line"><span class="val">► python backend: Flask / json datastore: ativo</span></p>
-      <p class="terminal-line"><span class="locked">► módulo especial: [ LOCKED — aguardando o momento certo ]</span></p>
+      <p class="terminal-line">
+        <span class="prompt">$ </span>status <span class="val">--sistema barbieri-roon</span>
+      </p>
+      <p class="terminal-line">
+        <span class="val" id="term-cards">► carregando...</span>
+      </p>
+      <p class="terminal-line">
+        <span class="val">► python backend: Flask / json datastore: ativo</span>
+      </p>
+      <p class="terminal-line">
+        <span class="locked">► módulo especial: [ LOCKED — aguardando o momento certo ]</span>
+      </p>
     </div>
   </section>
 
-  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <!-- FOOTER -->
   <footer>
     <p>© 2026 BARBIERI RD — Todos os direitos reservados</p>
     <p>Next-Gen Web · CyberSec · Python</p>
   </footer>
-
-  <!-- ── MODAL ──────────────────────────────────────────── -->
-  <div class="modal-overlay" id="modal-overlay">
-    <div class="modal" id="modal">
-      <button class="modal-close" id="modal-close">
-        <i class="ti ti-x"></i>
-      </button>
-      <span class="modal-tag" id="modal-tag"></span>
-      <h2 id="modal-title"></h2>
-      <div class="modal-content" id="modal-content"></div>
-      <div class="modal-meta">
-        <span class="modal-status" id="modal-status"></span>
-        <span class="modal-date" id="modal-date"></span>
-      </div>
-    </div>
-  </div>
 
   <script src="/static/js/main.js"></script>
 </body>

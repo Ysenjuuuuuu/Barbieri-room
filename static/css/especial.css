@@ -1,0 +1,222 @@
+/* ============================================================
+   BARBIERI-ROON — especial.css
+   Página "Cantinho da Mon Cherí Bordin"
+   ============================================================ */
+
+.especial-body {
+  background: #080412;
+}
+
+/* ── NAV ─────────────────────────────────────────────────── */
+
+.especial-nav {
+  background: rgba(8,4,18,0.96) !important;
+  border-bottom-color: rgba(244,114,182,0.08) !important;
+}
+.especial-nav .nav-logo span { color: var(--pink) !important; }
+
+.especial-badge {
+  color: var(--pink) !important;
+  border-color: rgba(244,114,182,0.3) !important;
+}
+.especial-badge::before {
+  background: var(--pink) !important;
+  animation: heartpulse 1.8s ease-in-out infinite !important;
+}
+
+/* ── HERO ────────────────────────────────────────────────── */
+
+.especial-hero {
+  min-height: calc(100vh - 60px);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  padding: 3rem 2rem;
+}
+
+/* glow de fundo */
+.especial-hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 800px 500px at 50% 40%, rgba(244,114,182,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 300px at 20% 80%, rgba(192,132,252,0.05) 0%, transparent 60%);
+}
+
+/* ── PARTÍCULAS (JS) ─────────────────────────────────────── */
+
+.especial-particles {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(244,114,182,0.4);
+  animation: float-up linear infinite;
+}
+@keyframes float-up {
+  0%   { transform: translateY(0) scale(1); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-100vh) scale(0.3); opacity: 0; }
+}
+
+/* ── CONTEÚDO CENTRAL ────────────────────────────────────── */
+
+.especial-content {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  gap: 0;
+}
+
+.especial-label {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 3px; color: rgba(244,114,182,0.4);
+  margin-bottom: 1.75rem;
+}
+
+.especial-heart {
+  font-size: 52px; margin-bottom: 1.75rem;
+  animation: heartbeat 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 24px rgba(244,114,182,0.5));
+  display: block;
+}
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%       { transform: scale(1.14); }
+  28%       { transform: scale(1); }
+  42%       { transform: scale(1.07); }
+}
+@keyframes heartpulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(244,114,182,0.4); }
+  50%       { opacity: 0.5; }
+}
+
+.especial-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px; font-weight: 400;
+  color: var(--text-1); line-height: 1.25;
+  margin-bottom: 1rem;
+}
+.especial-title span { color: var(--pink); font-style: italic; }
+
+.especial-subtitle {
+  font-size: 14px; color: rgba(244,114,182,0.45);
+  line-height: 1.8; max-width: 360px;
+  margin-bottom: 2.5rem;
+}
+
+/* ── SPOTIFY CARD ────────────────────────────────────────── */
+
+.spotify-card {
+  background: rgba(244,114,182,0.04);
+  border: 0.5px dashed rgba(244,114,182,0.2);
+  border-radius: var(--radius);
+  padding: 1.5rem; max-width: 360px; width: 100%;
+}
+.spotify-card-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem;
+}
+.spotify-icon-wrap {
+  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(29,185,84,0.1);
+  border: 0.5px solid rgba(29,185,84,0.25);
+  display: flex; align-items: center; justify-content: center;
+}
+.spotify-card-title {
+  font-size: 13px; font-weight: 500; color: var(--text-2);
+  text-align: left;
+}
+.spotify-card-sub {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 1px; color: var(--text-4);
+  text-align: left; margin-top: 2px;
+}
+.spotify-lock-badge {
+  margin-left: auto; font-family: var(--mono); font-size: 9px;
+  letter-spacing: 1px; color: rgba(244,114,182,0.4);
+  border: 0.5px dashed rgba(244,114,182,0.2);
+  padding: 2px 8px; border-radius: 2px; white-space: nowrap;
+}
+
+/* animação de ondas (placeholder paused) */
+.spotify-wave {
+  display: flex; align-items: flex-end; gap: 3px;
+  height: 28px; margin-bottom: 1rem; justify-content: center;
+  opacity: 0.35;
+}
+.spotify-wave span {
+  display: block; width: 4px; border-radius: 2px;
+  background: rgba(244,114,182,0.6);
+  animation: wave-bar 1.4s ease-in-out infinite;
+}
+.spotify-wave span:nth-child(1) { height: 8px;  animation-delay: 0s; }
+.spotify-wave span:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+.spotify-wave span:nth-child(3) { height: 24px; animation-delay: 0.2s; }
+.spotify-wave span:nth-child(4) { height: 12px; animation-delay: 0.3s; }
+.spotify-wave span:nth-child(5) { height: 20px; animation-delay: 0.4s; }
+.spotify-wave span:nth-child(6) { height: 8px;  animation-delay: 0.5s; }
+.spotify-wave span:nth-child(7) { height: 16px; animation-delay: 0.6s; }
+.spotify-wave span:nth-child(8) { height: 10px; animation-delay: 0.7s; }
+
+@keyframes wave-bar {
+  0%, 100% { transform: scaleY(0.4); }
+  50%       { transform: scaleY(1); }
+}
+
+.spotify-desc {
+  font-size: 12px; color: var(--text-4); line-height: 1.7; text-align: center;
+}
+
+/* ── MENSAGEM PESSOAL ────────────────────────────────────── */
+
+.especial-message-section {
+  max-width: 640px; margin: 0 auto;
+  padding: 2.5rem 2.5rem 3rem;
+}
+.especial-message-box {
+  background: rgba(244,114,182,0.03);
+  border: 0.5px solid rgba(244,114,182,0.1);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+  display: flex; flex-direction: column; align-items: center; gap: 1rem;
+  position: relative;
+}
+.especial-quote-icon {
+  font-size: 28px; color: rgba(244,114,182,0.25);
+}
+.especial-message-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-style: italic;
+  color: rgba(244,114,182,0.55);
+  line-height: 1.9; text-align: center;
+  max-width: 420px;
+}
+.especial-message-author {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 1.5px; color: rgba(244,114,182,0.3);
+}
+.especial-hint {
+  font-family: var(--mono); font-size: 9px;
+  color: rgba(100,116,139,0.3);
+  margin-top: 0.5rem;
+}
+.especial-hint code {
+  background: rgba(255,255,255,0.04);
+  padding: 1px 5px; border-radius: 2px;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+
+.especial-footer {
+  background: #080412 !important;
+  border-top-color: rgba(244,114,182,0.08) !important;
+}
+.especial-footer p:last-child { color: rgba(244,114,182,0.3) !important; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .especial-title { font-size: 26px; }
+  .especial-message-section { padding: 2rem 1.25rem 3rem; }
+}
